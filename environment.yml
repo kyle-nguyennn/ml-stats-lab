@@ -1,4 +1,4 @@
-name: fda-lab1
+name: ml-stats
 channels:
   - conda-forge
 dependencies:
