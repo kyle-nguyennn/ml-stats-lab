@@ -131,4 +131,65 @@ $$
 
 ## (b) Endpoint behavior
 
-<!-- TODO: Explain the behavior at t = 0 and t = 255 and the two competing effects. -->
+At either endpoint, the threshold produces a degenerate partition in which
+one class contains all the pixels and the other class is empty. Thus, at
+\(t=0\) or \(t=255\), one of the class weights is zero and
+
+$$
+\omega_1(t)\omega_2(t)=0.
+$$
+
+Consequently,
+
+$$
+\sigma_b^2(t)
+=\omega_1(t)\omega_2(t)
+\left(\mu_1(t)-\mu_2(t)\right)^2
+=0.
+$$
+
+For an interior threshold, the two factors in \(\sigma_b^2(t)\) represent
+competing effects. The factor \(\omega_1(t)\omega_2(t)\) favors a balanced
+partition. To see this using the Cauchy--Schwarz inequality,
+
+$$
+\left(\omega_1+\omega_2\right)^2
+\leq
+\left(1^2+1^2\right)
+\left(\omega_1^2+\omega_2^2\right).
+$$
+
+Since \(\omega_1+\omega_2=1\), this gives
+
+$$
+\omega_1^2+\omega_2^2\geq\frac{1}{2}.
+$$
+
+Therefore,
+
+$$
+\begin{aligned}
+\omega_1\omega_2
+&=\frac{(\omega_1+\omega_2)^2-(\omega_1^2+\omega_2^2)}{2}\\
+&\leq\frac{1-\frac12}{2}
+=\frac14.
+\end{aligned}
+$$
+
+Equality in Cauchy--Schwarz holds when
+\((\omega_1,\omega_2)\) is proportional to \((1,1)\). Together with
+\(\omega_1+\omega_2=1\), this implies
+
+$$
+\omega_1=\omega_2=\frac12.
+$$
+
+On the other hand, the factor
+\(\left(\mu_1(t)-\mu_2(t)\right)^2\) favors a threshold that produces
+classes with strongly separated mean intensities. A threshold near an
+extreme may isolate a small group of very dark or very bright pixels, giving
+well-separated class means but a small value of \(\omega_1\omega_2\). A
+threshold closer to the center may balance the class sizes, but it can cut
+through a concentrated histogram mode and reduce the separation between the
+class means. Therefore, Otsu's method selects the threshold that gives the
+best product of class-size balance and class-mean separation.
